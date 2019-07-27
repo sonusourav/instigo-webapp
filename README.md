@@ -1,6 +1,7 @@
 # instigo-webapp
-Webapp for instigo
-Install Angular-cli by command:- 
+Webapp for instiGO
+Instructions:-
+Install Angular-cli by command:-npm install -g @angular/cli  
 Now open 2 terminals
 1)npm run start
 2)ng serve
