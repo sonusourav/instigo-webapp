@@ -1,0 +1,87 @@
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+<div class="search-div">
+  <button mat-raised-button routerLink="/auth/signup">
+    <mat-icon>add</mat-icon>Create
+  </button>
+  <mat-form-field class="search-form-field" floatLabel="never">
+    <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off" (keyup)="applyFilter()">
+    <button mat-button matSuffix mat-icon-button aria-label="Clear"*ngIf="searchKey"  (click)="onSearchClear()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+</div>
+<div class="mat-elevation-z8">
+  <mat-table [dataSource]="listData"  matSort>
+    <ng-container matColumnDef="firstName">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>Full Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.firstName}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="email">
+      <mat-header-cell *matHeaderCellDef  mat-sort-header>Email</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.email}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="mobile">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Mobile</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.phoneNum}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="city">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>City</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.city}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="LastName">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Department</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.lastName}}</mat-cell>
+    </ng-container>
+     <ng-container matColumnDef="actions">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-icon-button (click)="onEdit(row)"><mat-icon>launch</mat-icon></button>
+        <button mat-icon-button color="warn" (click)="ondisable(row.email)"><mat-icon>delete_outline</mat-icon></button>
+      </mat-cell>
+</ng-container>
+    <ng-container matColumnDef="loading">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        Loading data...
+      </mat-footer-cell>
+    </ng-container>
+    <ng-container matColumnDef="noData">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        No data.
+      </mat-footer-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+    <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':listData!=null}"></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(listData!=null && listData.data.length==0)}"></mat-footer-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="5" showFirstLastButtons></mat-paginator>
+</div>
+<div class="container-fluid" style="position: fixed; bottom: 0px;background-color:ivory; padding:1rem; border-top-left-radius: 2rem; border-top-right-radius: 2rem;">
+        <div class="row justify-content-center">
+          <i class="fab fa-facebook-f" style="margin-right: 10px;"></i>
+          <i class="fab fa-instagram" style="margin-right: 10px;margin-left: 10px; color: orchid"></i>
+          <i class="fab fa-twitter" style="margin-right: 10px;margin-left: 10px; color: royalblue"></i>
+          <i class="fab fa-reddit" style="margin-right: 10px;margin-left: 10px; color:orangered;"></i>
+        </div>
+        <div class="row justify-content-center" style="margin-top: 20px;">
+          Copyright @2019 All rights reserved
+        </div>
+      </div>
+<!-- <table id="#exemple" class="table table-striped table-bordered table-sm row-border hover" datatable [dtOptions]="dtOptions"
+  [dtTrigger]="dtTrigger">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+      <th>PhoneNum</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let user of users">
+      <td>{{ user.firstName }}</td>
+      <td>{{ user.email }}</td>
+      <td>{{ user.phoneNum }}</td>
+    </tr>
+  </tbody>
+</table> -->

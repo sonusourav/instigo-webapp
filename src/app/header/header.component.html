@@ -1,0 +1,102 @@
+<header class="header-area">
+
+        <!-- Top Header Area -->
+        <div class="top-header">
+            <div class="container h-100">
+                <div class="row h-100">
+                    <div class="col-12 h-100">
+                        <div class="header-content h-100 d-flex align-items-center justify-content-between">
+                            <div class="academy-logo">
+                                <a routerLink="/"><img src="../assets/img/core-img/logo17.png" alt=""></a>
+                            </div>
+                            <div *ngIf="!userIsAuthenticated" class="login-content">
+                                <a routerLink="auth/signup">Register&nbsp;/&nbsp;&nbsp;&nbsp;</a>
+
+                                 <a (click)="onclic()">Login</a>
+                            </div>
+                            <div *ngIf="userIsAuthenticated" class="login-content">
+                                <a (click)="onLogout()">LogOut</a>
+                            </div>
+                            
+                               
+                           
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navbar Area -->
+        <div class="academy-main-menu">
+            <div class="classy-nav-container breakpoint-off">
+                <div class="container">
+                    <!-- Menu -->
+                    <nav class="classy-navbar justify-content-between" id="academyNav">
+
+                        <!-- Navbar Toggler -->
+                        <div class="classy-navbar-toggler">
+                            <span class="navbarToggler"><span></span><span></span><span></span></span>
+                        </div>
+
+                        <!-- Menu -->
+                        <div class="classy-menu">
+
+                            <!-- close btn -->
+                            <div class="classycloseIcon">
+                                <div class="cross-wrap"><span class="top"></span><span class="bottom"></span></div>
+                            </div>
+
+                            <!-- Nav Start -->
+                            <div class="classynav">
+                                <ul>
+                                    <li><a routerLink="/">Home</a></li>
+                                        
+                                  
+                                      <li *ngIf="userIsAuthenticated" class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"routerLink="#">Mega Menu</a>
+                                         <div class="megamenu">
+                                          <div class="dropdown-menu">
+                                     
+                                            <ul class="single-mega cn-col-4">
+                                                <li><a class="dropdown-item" routerLink="#">Home</a></li>
+                                                <li><a class="dropdown-item" routerLink="#">Services &amp; Features</a></li>
+                                                <li><a class="dropdown-item" routerLink="#">Accordions and tabs</a></li>
+                                                <li><a class="dropdown-item" routerLink="#">Menu ideas</a></li>
+                                                <li><a class="dropdown-item" routerLink="#">Students Gallery</a></li>
+                                            </ul>
+                                            <ul class="single-mega cn-col-4">
+                                                <li><a class="dropdown-item" routerLink="#">Home</a></li>
+                                                <li><a class="dropdown-item" routerLink="#">Services &amp; Features</a></li>
+                                                <li><a class="dropdown-item" routerLink="#">Accordions and tabs</a></li>
+                                                <li><a class="dropdown-item" routerLink="#">Menu ideas</a></li>
+                                                <li><a class="dropdown-item" routerLink="#">Students Gallery</a></li>
+                                            </ul>
+                                            <ul class="single-mega cn-col-4">
+                                                <li><a routerLink="#">Home</a></li>
+                                                <li><a routerLink="#">Services &amp; Features</a></li>
+                                                <li><a routerLink="#">Accordions and tabs</a></li>
+                                                <li><a routerLink="#">Menu ideas</a></li>
+                                                <li><a routerLink="#">Students Gallery</a></li>
+                                            </ul>
+                                        </div>
+                                       </div>
+                                    </li>
+                                    <li><a routerLink="../assets/about-us.html">About Us</a></li>
+                                    <li><a routerLink="../assets/course.html">Content</a></li>
+                                    <li><a routerLink="../assets/contact.html">Contact</a></li>
+                                </ul>
+                            </div>
+                             
+                            <!-- Nav End -->
+                        </div>
+
+                        <!-- Calling Info -->
+                        <div class="calling-info">
+                            <div class="call-center">
+                                <a routerLink="/"><span>Get InstiGO App here</span></a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>

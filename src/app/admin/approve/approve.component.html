@@ -1,0 +1,265 @@
+<!--<div class="container">
+    <div class="row justify-content-center">
+        <mat-tab-group>
+            <mat-tab label="Technology">  </mat-tab>
+            <mat-tab label="Festival"> Content 3 </mat-tab>
+            <mat-tab label="Party"> Content 2 </mat-tab>
+            <mat-tab label="Business"> Content 3 </mat-tab>
+            <mat-tab label="Family"> Content 3 </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>--> <mat-toolbar>
+  <span ><h1>Approved Events</h1></span>
+  <span class="fill-remaining-space"></span>
+</mat-toolbar>
+
+<div class="container">
+    <div classs="row justify-content-center">
+    <mat-tab-group>
+        <mat-tab label="Technology">
+            <div class="container-fluid">
+                <span id="pageNumber"></span>
+                <div *ngIf="events.length > 0 && !isLoading">
+                    <div class="row">
+                    <div *ngFor="let event of events">
+                              <div *ngIf="event['category']==='Technology' && event.verify">
+                                    <div class="col-4">
+                                        <div class="shadow-lg p-3 imagg">
+                                            <div class="imagg-info">
+                                                <h2 class="mb-3">{{ event.title }}</h2>
+                                                <h5 class="mb-1">{{ event.city }}</h5>
+                                                <a class="btn btn-primary event-details" [routerLink]="['/event-details', event.id]">EVENT DETAILS</a>
+                                                <span *ngIf="userIsAuthenticated">
+
+                                                    <a class="btn btn-primary" [routerLink]="['/edit', event.id]">EDIT</a>
+                                                     <a class="btn btn-primary" (click)="onverify(event.id)">Approval</a>
+                                                     <a class="btn btn-primary" (click)="ondisable(event.id)">Disable</a>
+                                                    <a class="btn btn-danger" (click)="onDelete(event.id)">DELETE</a>
+                                                </span>
+                                            </div>
+                                            <img [src]="event.imagePath" [alt]="event.title"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Party">
+                <div class="container-fluid">
+                    <span id="pageNumber"></span>
+                    <div *ngIf="events.length > 0 && !isLoading">
+                        <div class="row">
+                        <div *ngFor="let event of events">
+                            <div *ngIf="event['category']==='Party'&& event.verify">
+                                    <div class="col-4">
+                                        <div class="shadow-lg p-3 imagg">
+                                            <div class="imagg-info">
+                                                <h2 class="mb-3">{{ event.title }}</h2>
+                                                <h5 class="mb-1">{{ event.city }}</h5>
+                                                
+                                                <a class="btn btn-primary event-details" [routerLink]="['/event-details', event.id]">EVENT DETAILS</a>
+                                              <span *ngIf="userIsAuthenticated">
+                                                    <a class="btn btn-primary" [routerLink]="['/edit', event.id]">EDIT</a>
+                                                    <a class="btn btn-primary" (click)="ondisable(event.id)">Disable</a>
+                                                    <a class="btn btn-danger" (click)="onDelete(event.id)">DELETE</a>
+                                           </span>
+                                            </div>
+                                            <img [src]="event.imagePath" [alt]="event.title"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </mat-tab>
+            <mat-tab label="Festival">
+                    <div class="container-fluid">
+                        <span id="pageNumber"></span>
+                        <div *ngIf="events.length > 0 && !isLoading">
+                            <div class="row">
+                            <div *ngFor="let event of events">
+                                      <div *ngIf="event['category']==='Festival'&& event.verify">
+                                            <div class="col-4">
+                                                <div class="shadow-lg p-3 imagg">
+                                                    <div class="imagg-info">
+                                                        <h2 class="mb-3">{{ event.title }}</h2>
+                                                        <h5 class="mb-1">{{ event.city }}</h5>
+                                                        
+                                                        <a class="btn btn-primary event-details" [routerLink]="['/event-details', event.id]">EVENT DETAILS</a>
+                                                        <span *ngIf="userIsAuthenticated">
+                                                            <a class="btn btn-primary" [routerLink]="['/edit', event.id]">EDIT</a>
+                                                            <a class="btn btn-primary" (click)="ondisable(event.id)">Disable</a>
+                                                            <a class="btn btn-danger" (click)="onDelete(event.id)">DELETE</a>
+                                                        </span>
+                                                    </div>
+                                                    <img [src]="event.imagePath" [alt]="event.title"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Family">
+                            <div class="container-fluid">
+                                <span id="pageNumber"></span>
+                                <div *ngIf="events.length > 0 && !isLoading">
+                                    <div class="row">
+                                    <div *ngFor="let event of events">
+                                              <div *ngIf="event['category']==='Family'&& event.verify">
+                                                    <div class="col-4">
+                                                        <div class="shadow-lg p-3 imagg">
+                                                            <div class="imagg-info">
+                                                                <h2 class="mb-3">{{ event.title }}</h2>
+                                                                <h5 class="mb-1">{{ event.city }}</h5>
+                                                                
+                                                                <a class="btn btn-primary event-details" [routerLink]="['/event-details', event.id]">EVENT DETAILS</a>
+                                                                <span *ngIf="userIsAuthenticated">
+                                                                    <a class="btn btn-primary" [routerLink]="['/edit', event.id]">EDIT</a>
+                                                                     <a class="btn btn-primary" (click)="ondisable(event.id)">Disable</a>
+                                                                    <a class="btn btn-danger" (click)="onDelete(event.id)">DELETE</a>
+                                                                </span>
+                                                            </div>
+                                                            <img [src]="event.imagePath" [alt]="event.title"/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </mat-tab>
+                            <mat-tab label="Business">
+                                    <div class="container-fluid">
+                                        <span id="pageNumber"></span>
+                                        <div *ngIf="events.length > 0 && !isLoading">
+                                            <div class="row">
+                                            <div *ngFor="let event of events">
+                                                      <div *ngIf="event['category']==='Business'&& event.verify">
+                                                            <div class="col-4">
+                                                                <div class="shadow-lg p-3 imagg">
+                                                                    <div class="imagg-info">
+                                                                        <h2 class="mb-3">{{ event.title }}</h2>
+                                                                        <h5 class="mb-1">{{ event.city }}</h5>
+                                                                        
+                                                                        <a class="btn btn-primary event-details" [routerLink]="['/event-details', event.id]">EVENT DETAILS</a>
+                                                                        <span *ngIf="userIsAuthenticated">
+                                                                            <a class="btn btn-primary" [routerLink]="['/edit', event.id]">EDIT</a>
+                                                                             <a class="btn btn-primary" (click)="ondisable(event.id)">Disable</a>
+                                                                            <a class="btn btn-danger" (click)="onDelete(event.id)">DELETE</a>
+                                                                        </span>
+                                                                    </div>
+                                                                    <img [src]="event.imagePath" [alt]="event.title"/>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </mat-tab>
+            <mat-tab label="Sports">
+                    <div class="container-fluid">
+                        <span id="pageNumber"></span>
+                        <div *ngIf="events.length > 0 && !isLoading">
+                            <div class="row">
+                            <div *ngFor="let event of events">
+                                <div *ngIf="event['category']==='Sports'&& event.verify">
+                                        <div class="col-4">
+                                            <div class="shadow-lg p-3 imagg">
+                                                <div class="imagg-info">
+                                                    <h2 class="mb-3">{{ event.title }}</h2>
+                                                    <h5 class="mb-1">{{ event.city }}</h5>
+                                                    
+                                                    <a class="btn btn-primary event-details" [routerLink]="['/event-details', event.id]">EVENT DETAILS</a>
+                                                    <span *ngIf="userIsAuthenticated">
+                                                        <a class="btn btn-primary" [routerLink]="['/edit', event.id]">EDIT</a>
+                                                         <a class="btn btn-primary" (click)="ondisable(event.id)">Disable</a>
+                                                        <a class="btn btn-danger" (click)="onDelete(event.id)">DELETE</a>
+                                                    </span>
+                                                </div>
+                                                <img [src]="event.imagePath" [alt]="event.title"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Chill">
+                        <div class="container-fluid">
+                            <span id="pageNumber"></span>
+                            <div *ngIf="events.length > 0 && !isLoading">
+                                <div class="row">
+                                <div *ngFor="let event of events">
+                                    <div *ngIf="event['category']==='Chill'&& (event.verify)">
+                                            <div class="col-4">
+                                                <div class="shadow-lg p-3 imagg">
+                                                    <div class="imagg-info">
+                                                        <h2 class="mb-3">{{ event.title }}</h2>
+                                                        <h5 class="mb-1">{{ event.city }}</h5>
+                                                        
+                                                        <a class="btn btn-primary event-details" [routerLink]="['/event-details', event.id]">EVENT DETAILS</a>
+                                                        <span *ngIf="userIsAuthenticated">
+                                                            <a class="btn btn-primary" [routerLink]="['/edit', event.id]">EDIT</a>
+                                                             <a class="btn btn-primary" (click)="ondisable(event.id)">Disable</a>
+                                                            <a class="btn btn-danger" (click)="onDelete(event.id)">DELETE</a>
+                                                        </span>
+                                                    </div>
+                                                    <img [src]="event.imagePath" [alt]="event.title"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </mat-tab>
+                    <mat-tab label="Party">
+                            <div class="container-fluid">
+                                <span id="pageNumber"></span>
+                                <div *ngIf="events.length > 0 && !isLoading">
+                                    <div class="row">
+                                    <div *ngFor="let event of events">
+                                        <div *ngIf="event['category']==='Party'&& event.verify">
+                                                <div class="col-4">
+                                                    <div class="shadow-lg p-3 imagg">
+                                                        <div class="imagg-info">
+                                                            <h2 class="mb-3">{{ event.title }}</h2>
+                                                            <h5 class="mb-1">{{ event.city }}</h5>
+                                                            
+                                                            <a class="btn btn-primary event-details" [routerLink]="['/event-details', event.id]">EVENT DETAILS</a>
+                                                            <span *ngIf="userIsAuthenticated">
+                                                                <a class="btn btn-primary" [routerLink]="['/edit', event.id]">EDIT</a>
+                                                                <a class="btn btn-primary" (click)="ondisable(event.id)">Disable</a>
+                                                                <a class="btn btn-danger" (click)="onDelete(event.id)">DELETE</a>
+                                                            </span>
+                                                        </div>
+                                                        <img [src]="event.imagePath" [alt]="event.title"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-tab>
+        </mat-tab-group>
+    </div>
+</div>
+<div class="container-fluid" style="position: fixed; bottom: 0px;background-color:ivory; padding:1rem; border-top-left-radius: 2rem; border-top-right-radius: 2rem;">
+        <div class="row justify-content-center">
+          <i class="fab fa-facebook-f" style="margin-right: 10px;"></i>
+          <i class="fab fa-instagram" style="margin-right: 10px;margin-left: 10px; color: orchid"></i>
+          <i class="fab fa-twitter" style="margin-right: 10px;margin-left: 10px; color: royalblue"></i>
+          <i class="fab fa-reddit" style="margin-right: 10px;margin-left: 10px; color:orangered;"></i>
+        </div>
+        <div class="row justify-content-center" style="margin-top: 20px;">
+          Copyright @2019 All rights reserved
+        </div>
+      </div>
