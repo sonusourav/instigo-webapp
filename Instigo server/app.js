@@ -26,7 +26,6 @@ const complaintsRoutes = require('./routes/complaints');
 const UsersController = require('./controllers/users');
 var GoogleAuth = require('google-auth-library');
 const url = require("url");
-var http = require('http-request');
 var auth = new GoogleAuth();
 mongoose.Promise = global.Promise;
 const app = express();
@@ -89,14 +88,14 @@ app.get('/auth/google/callback', function(req, res, next){
     responseData = JSON.stringify(responseData);
  res.cookie('responseData', responseData);
       console.log(url.format({
-        pathname: 'http://localhost:4300/auth/oauth',
+        pathname: 'http://localhost:4200/auth/oauth',
         query: {
           'token': responseData
         }   
       }));
       console.log(fetchedUser._id);
       res.redirect(url.format({
-        pathname: 'http://localhost:4300/auth/oauth',
+        pathname: 'http://localhost:4200/auth/oauth',
         query: {
           'token':responseData 
         }     
